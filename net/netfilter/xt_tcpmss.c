@@ -136,7 +136,7 @@ static u_int32_t tcpmss_reverse_mtu(struct net *net,
 	}
 
 	nf_route(net, (struct dst_entry **)&rt, &fl, false, family);
-	if (rt != NULL) {
+	if (rt) {
 		mtu = dst_mtu(&rt->dst);
 		dst_release(&rt->dst);
 	}

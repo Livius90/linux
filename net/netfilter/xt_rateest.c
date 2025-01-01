@@ -143,6 +143,7 @@ static struct xt_match xt_rateest_mt_reg __read_mostly = {
 };
 
 struct xt_rateest_net {
+	/* To synchronize concurrent synchronous rate estimator operations. */
 	struct mutex hash_lock;
 	struct hlist_head hash[RATEEST_HSIZE];
 };
