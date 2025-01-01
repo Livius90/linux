@@ -236,7 +236,7 @@ static int __init dscp_init(void)
 		return ret;
 	}
 	return 0;
- }
+}
 
 static void __exit dscp_exit(void)
 {
