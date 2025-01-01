@@ -66,7 +66,7 @@ static unsigned int
 hl_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 {
 	struct ipv6hdr *ip6h;
-	const struct ip6t_HL_info *info = par->targinfo;
+	const struct ip6t_hl_info *info = par->targinfo;
 	int new_hl;
 
 	if (skb_ensure_writable(skb, sizeof(*ip6h)))
@@ -111,7 +111,7 @@ static int ttl_tg_check(const struct xt_tgchk_param *par)
 
 static int hl_tg6_check(const struct xt_tgchk_param *par)
 {
-	const struct ip6t_HL_info *info = par->targinfo;
+	const struct ip6t_hl_info *info = par->targinfo;
 
 	if (info->mode > IP6T_HL_MAXMODE)
 		return -EINVAL;
@@ -136,7 +136,7 @@ static struct xt_target hl_tg_reg[] __read_mostly = {
 		.revision   = 0,
 		.family     = NFPROTO_IPV6,
 		.target     = hl_tg6,
-		.targetsize = sizeof(struct ip6t_HL_info),
+		.targetsize = sizeof(struct ip6t_hl_info),
 		.table      = "mangle",
 		.checkentry = hl_tg6_check,
 		.me         = THIS_MODULE,
