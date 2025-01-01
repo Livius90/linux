@@ -11,7 +11,7 @@ struct xt_tcpmss_match_info {
     __u8 invert;
 };
 
-struct xt_tcpmss_info {
+struct xt_tcpmss_target_info {
 	__u16 mss;
 };
 

@@ -74,7 +74,7 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 		     unsigned int tcphoff,
 		     unsigned int minlen)
 {
-	const struct xt_tcpmss_info *info = par->targinfo;
+	const struct xt_tcpmss_target_info *info = par->targinfo;
 	struct tcphdr *tcph;
 	int len, tcp_hdrlen;
 	unsigned int i;
@@ -262,7 +262,7 @@ static inline bool find_syn_match(const struct xt_entry_match *m)
 
 static int tcpmss_tg4_check(const struct xt_tgchk_param *par)
 {
-	const struct xt_tcpmss_info *info = par->targinfo;
+	const struct xt_tcpmss_target_info *info = par->targinfo;
 	const struct ipt_entry *e = par->entryinfo;
 	const struct xt_entry_match *ematch;
 
@@ -286,7 +286,7 @@ static int tcpmss_tg4_check(const struct xt_tgchk_param *par)
 #if IS_ENABLED(CONFIG_IP6_NF_IPTABLES)
 static int tcpmss_tg6_check(const struct xt_tgchk_param *par)
 {
-	const struct xt_tcpmss_info *info = par->targinfo;
+	const struct xt_tcpmss_target_info *info = par->targinfo;
 	const struct ip6t_entry *e = par->entryinfo;
 	const struct xt_entry_match *ematch;
 
@@ -314,7 +314,7 @@ static struct xt_target tcpmss_tg_reg[] __read_mostly = {
 		.name		= "TCPMSS",
 		.checkentry	= tcpmss_tg4_check,
 		.target		= tcpmss_tg4,
-		.targetsize	= sizeof(struct xt_tcpmss_info),
+		.targetsize	= sizeof(struct xt_tcpmss_target_info),
 		.proto		= IPPROTO_TCP,
 		.me		= THIS_MODULE,
 	},
@@ -324,7 +324,7 @@ static struct xt_target tcpmss_tg_reg[] __read_mostly = {
 		.name		= "TCPMSS",
 		.checkentry	= tcpmss_tg6_check,
 		.target		= tcpmss_tg6,
-		.targetsize	= sizeof(struct xt_tcpmss_info),
+		.targetsize	= sizeof(struct xt_tcpmss_target_info),
 		.proto		= IPPROTO_TCP,
 		.me		= THIS_MODULE,
 	},
