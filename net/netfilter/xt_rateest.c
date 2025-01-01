@@ -349,6 +349,7 @@ static struct pernet_operations xt_rateest_net_ops = {
 static int __init xt_rateest_init(void)
 {
 	int ret = register_pernet_subsys(&xt_rateest_net_ops);
+
 	if (ret)
 		return ret;
 
