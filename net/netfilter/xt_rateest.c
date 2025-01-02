@@ -26,7 +26,7 @@ MODULE_ALIAS("ipt_rateest");
 MODULE_ALIAS("ip6t_rateest");
 MODULE_ALIAS("ipt_RATEEST");
 MODULE_ALIAS("ip6t_RATEEST");
-MODULE_ALIAS("xt_RATEEST")
+MODULE_ALIAS("xt_RATEEST");
 
 static bool
 xt_rateest_mt(const struct sk_buff *skb, struct xt_action_param *par)

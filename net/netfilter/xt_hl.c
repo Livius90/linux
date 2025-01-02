@@ -31,7 +31,7 @@ MODULE_ALIAS("ipt_ttl");
 MODULE_ALIAS("ip6t_hl");
 MODULE_ALIAS("ipt_TTL");
 MODULE_ALIAS("ip6t_HL");
-MODULE_ALIAS("xt_HL")
+MODULE_ALIAS("xt_HL");
 
 static bool ttl_mt(const struct sk_buff *skb, struct xt_action_param *par)
 {

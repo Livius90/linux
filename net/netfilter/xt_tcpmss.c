@@ -32,7 +32,7 @@ MODULE_ALIAS("ipt_tcpmss");
 MODULE_ALIAS("ip6t_tcpmss");
 MODULE_ALIAS("ipt_TCPMSS");
 MODULE_ALIAS("ip6t_TCPMSS");
-MODULE_ALIAS("xt_TCPMSS")
+MODULE_ALIAS("xt_TCPMSS");
 
 static bool
 tcpmss_mt(const struct sk_buff *skb, struct xt_action_param *par)
