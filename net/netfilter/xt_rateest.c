@@ -19,6 +19,15 @@
 
 #define RATEEST_HSIZE	16
 
+MODULE_AUTHOR("Patrick McHardy <kaber@trash.net>");
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("xtables packet rate estimator");
+MODULE_ALIAS("ipt_rateest");
+MODULE_ALIAS("ip6t_rateest");
+MODULE_ALIAS("ipt_RATEEST");
+MODULE_ALIAS("ip6t_RATEEST");
+MODULE_ALIAS("xt_RATEEST")
+
 static bool
 xt_rateest_mt(const struct sk_buff *skb, struct xt_action_param *par)
 {
@@ -373,12 +382,5 @@ static void __exit xt_rateest_exit(void)
 	unregister_pernet_subsys(&xt_rateest_net_ops);
 }
 
-MODULE_AUTHOR("Patrick McHardy <kaber@trash.net>");
-MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("xtables packet rate estimator");
-MODULE_ALIAS("ipt_rateest");
-MODULE_ALIAS("ip6t_rateest");
-MODULE_ALIAS("ipt_RATEEST");
-MODULE_ALIAS("ip6t_RATEEST");
 module_init(xt_rateest_init);
 module_exit(xt_rateest_exit);

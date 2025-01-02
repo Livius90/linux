@@ -26,6 +26,7 @@ MODULE_ALIAS("ipt_DSCP");
 MODULE_ALIAS("ip6t_DSCP");
 MODULE_ALIAS("ipt_TOS");
 MODULE_ALIAS("ip6t_TOS");
+MODULE_ALIAS("xt_DSCP");
 
 static bool
 dscp_mt(const struct sk_buff *skb, struct xt_action_param *par)
