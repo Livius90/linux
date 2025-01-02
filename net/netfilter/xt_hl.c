@@ -93,7 +93,7 @@ static unsigned int
 ttl_tg(struct sk_buff *skb, const struct xt_action_param *par)
 {
 	struct iphdr *iph;
-	const struct ipt_ttl_info *info = par->targinfo;
+	const struct ipt_TTL_info *info = par->targinfo;
 	int new_ttl;
 
 	if (skb_ensure_writable(skb, sizeof(*iph)))
@@ -132,7 +132,7 @@ static unsigned int
 hl_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 {
 	struct ipv6hdr *ip6h;
-	const struct ip6t_hl_info *info = par->targinfo;
+	const struct ip6t_HL_info *info = par->targinfo;
 	int new_hl;
 
 	if (skb_ensure_writable(skb, sizeof(*ip6h)))
@@ -166,7 +166,7 @@ hl_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 
 static int ttl_tg_check(const struct xt_tgchk_param *par)
 {
-	const struct ipt_ttl_info *info = par->targinfo;
+	const struct ipt_TTL_info *info = par->targinfo;
 
 	if (info->mode > IPT_TTL_MAXMODE)
 		return -EINVAL;
@@ -177,7 +177,7 @@ static int ttl_tg_check(const struct xt_tgchk_param *par)
 
 static int hl_tg6_check(const struct xt_tgchk_param *par)
 {
-	const struct ip6t_hl_info *info = par->targinfo;
+	const struct ip6t_HL_info *info = par->targinfo;
 
 	if (info->mode > IP6T_HL_MAXMODE)
 		return -EINVAL;
@@ -192,7 +192,7 @@ static struct xt_target hl_tg_reg[] __read_mostly = {
 		.revision   = 0,
 		.family     = NFPROTO_IPV4,
 		.target     = ttl_tg,
-		.targetsize = sizeof(struct ipt_ttl_info),
+		.targetsize = sizeof(struct ipt_TTL_info),
 		.table      = "mangle",
 		.checkentry = ttl_tg_check,
 		.me         = THIS_MODULE,
@@ -202,7 +202,7 @@ static struct xt_target hl_tg_reg[] __read_mostly = {
 		.revision   = 0,
 		.family     = NFPROTO_IPV6,
 		.target     = hl_tg6,
-		.targetsize = sizeof(struct ip6t_hl_info),
+		.targetsize = sizeof(struct ip6t_HL_info),
 		.table      = "mangle",
 		.checkentry = hl_tg6_check,
 		.me         = THIS_MODULE,

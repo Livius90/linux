@@ -30,7 +30,7 @@ struct xt_tos_match_info {
 };
 
 /* target info */
-struct xt_dscp_target_info {
+struct xt_DSCP_info {
 	__u8 dscp;
 };
 
