@@ -22,8 +22,8 @@ enum xt_rateest_match_mode {
 };
 
 struct xt_rateest_match_info {
-	char			name1[IFNAMSIZ];
-	char			name2[IFNAMSIZ];
+	char		name1[IFNAMSIZ];
+	char		name2[IFNAMSIZ];
 	__u16		flags;
 	__u16		mode;
 	__u32		bps1;
@@ -37,8 +37,8 @@ struct xt_rateest_match_info {
 };
 
 struct xt_rateest_target_info {
-	char			name[IFNAMSIZ];
-	__s8			interval;
+	char		name[IFNAMSIZ];
+	__s8		interval;
 	__u8		ewma_log;
 
 	/* Used internally by the kernel */
