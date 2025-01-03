@@ -832,7 +832,7 @@ config NETFILTER_XT_RATEEST
 	depends on NETFILTER_ADVANCED
 	help
 	  This option adds the "RATEEST" target and "rateest" match.
-	  
+
 	  Netfilter rateest matching allows you to match on the rate
 	  estimated by the RATEEST target.
 	  The target allows you to measure rates similar to TC estimators.
@@ -843,10 +843,10 @@ config NETFILTER_XT_TCPMSS
 	default m if NETFILTER_ADVANCED=n
 	help
 	  This option adds the "TCPMSS" target and "tcpmss" match.
-	
+
 	  Netfilter tcpmss matching allows you to examine the MSS value of
 	  TCP SYN packets, which control the maximum packet size for that connection.
-	  The target allows you to to alter the MSS value of TCP SYN packets,
+	  The target allows you to alter the MSS value of TCP SYN packets,
 	  to control the maximum size for that connection.
 
 # alphabetically ordered list of targets
@@ -961,7 +961,7 @@ config NETFILTER_XT_TARGET_HL
 	the header to arbitrary values. This is EXTREMELY DANGEROUS
 	since you can easily create immortal packets that loop
 	forever on the network.
-	
+
 	This is a backwards-compat option for the user's convenience
 	(e.g. when running oldconfig). It selects
 	CONFIG_NETFILTER_XT_HL (combined hl/HL module).
@@ -1436,7 +1436,7 @@ config NETFILTER_XT_MATCH_HL
 	HL matching allows you to match packets based on the hoplimit
 	in the IPv6 header, or the time-to-live field in the IPv4
 	header of the packet.
-	
+
 	This is a backwards-compat option for the user's convenience
 	(e.g. when running oldconfig). It selects
 	CONFIG_NETFILTER_XT_HL (combined hl/HL module).
