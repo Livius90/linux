@@ -804,7 +804,6 @@ config NETFILTER_XT_SET
 
 config NETFILTER_XT_DSCP
 	tristate '"DSCP" and "TOS" target and match support'
-	depends on IP_NF_MANGLE || IP6_NF_MANGLE || NFT_COMPAT
 	depends on NETFILTER_ADVANCED
 	help
 	  This option adds the "DSCP" target and "dscp" match.
@@ -816,7 +815,6 @@ config NETFILTER_XT_DSCP
 
 config NETFILTER_XT_HL
 	tristate '"HL" hoplimit target and match support'
-	depends on IP_NF_MANGLE || IP6_NF_MANGLE || NFT_COMPAT
 	depends on NETFILTER_ADVANCED
 	help
 	  This option adds the "HL" target and "hl" match.
