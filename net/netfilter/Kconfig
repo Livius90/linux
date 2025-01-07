@@ -825,6 +825,16 @@ config NETFILTER_XT_HL
 	  The target allows you to change the hoplimit/time-to-live
 	  value of the IP header.
 
+config NETFILTER_XT_RATEEST
+	tristate '"RATEEST" target and match support'
+	depends on NETFILTER_ADVANCED
+	help
+	  This option adds the "RATEEST" target and "rateest" match.
+
+	  Netfilter rateest matching allows you to match on the rate
+	  estimated by the RATEEST target.
+	  The target allows you to measure rates similar to TC estimators.
+
 # alphabetically ordered list of targets
 
 comment "Xtables targets"
@@ -1062,10 +1072,15 @@ config NETFILTER_XT_TARGET_NOTRACK
 config NETFILTER_XT_TARGET_RATEEST
 	tristate '"RATEEST" target support'
 	depends on NETFILTER_ADVANCED
+	select NETFILTER_XT_RATEEST
 	help
 	  This option adds a `RATEEST' target, which allows to measure
 	  rates similar to TC estimators. The `rateest' match can be
 	  used to match on the measured rates.
+
+	  This is a backwards-compat option for the user's convenience
+	  (e.g. when running oldconfig). It selects
+	  CONFIG_NETFILTER_XT_RATEEST (combined rateest/RATEEST module).
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
@@ -1575,6 +1590,10 @@ config NETFILTER_XT_MATCH_RATEEST
 	help
 	  This option adds a `rateest' match, which allows to match on the
 	  rate estimated by the RATEEST target.
+
+	  This is a backwards-compat option for the user's convenience
+	  (e.g. when running oldconfig). It selects
+	  CONFIG_NETFILTER_XT_RATEEST (combined rateest/RATEEST module).
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
