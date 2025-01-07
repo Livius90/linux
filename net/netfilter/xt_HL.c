@@ -54,8 +54,7 @@ ttl_tg(struct sk_buff *skb, const struct xt_action_param *par)
 	}
 
 	if (new_ttl != iph->ttl) {
-		csum_replace2(&iph->check, htons(iph->ttl << 8),
-					   htons(new_ttl << 8));
+		csum_replace2(&iph->check, htons(iph->ttl << 8), htons(new_ttl << 8));
 		iph->ttl = new_ttl;
 	}
 

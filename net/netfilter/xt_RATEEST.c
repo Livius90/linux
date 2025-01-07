@@ -20,6 +20,7 @@
 #define RATEEST_HSIZE	16
 
 struct xt_rateest_net {
+	/* To synchronize concurrent synchronous rate estimator operations. */
 	struct mutex hash_lock;
 	struct hlist_head hash[RATEEST_HSIZE];
 };

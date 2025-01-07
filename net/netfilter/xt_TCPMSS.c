@@ -31,13 +31,13 @@ MODULE_ALIAS("ipt_TCPMSS");
 MODULE_ALIAS("ip6t_TCPMSS");
 
 static inline unsigned int
-optlen(const u_int8_t *opt, unsigned int offset)
+optlen(const u8 *opt, unsigned int offset)
 {
 	/* Beware zero-length options: make finite progress */
-	if (opt[offset] <= TCPOPT_NOP || opt[offset+1] == 0)
+	if (opt[offset] <= TCPOPT_NOP || opt[offset + 1] == 0)
 		return 1;
 	else
-		return opt[offset+1];
+		return opt[offset + 1];
 }
 
 static u_int32_t tcpmss_reverse_mtu(struct net *net,
@@ -46,10 +46,11 @@ static u_int32_t tcpmss_reverse_mtu(struct net *net,
 {
 	struct flowi fl;
 	struct rtable *rt = NULL;
-	u_int32_t mtu     = ~0U;
+	u32 mtu     = ~0U;
 
 	if (family == PF_INET) {
 		struct flowi4 *fl4 = &fl.u.ip4;
+
 		memset(fl4, 0, sizeof(*fl4));
 		fl4->daddr = ip_hdr(skb)->saddr;
 	} else {
@@ -60,7 +61,7 @@ static u_int32_t tcpmss_reverse_mtu(struct net *net,
 	}
 
 	nf_route(net, (struct dst_entry **)&rt, &fl, false, family);
-	if (rt != NULL) {
+	if (rt) {
 		mtu = dst_mtu(&rt->dst);
 		dst_release(&rt->dst);
 	}
@@ -110,15 +111,16 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 			return -1;
 		}
 		newmss = min_mtu - minlen;
-	} else
+	} else {
 		newmss = info->mss;
+	}
 
 	opt = (u_int8_t *)tcph;
 	for (i = sizeof(struct tcphdr); i <= tcp_hdrlen - TCPOLEN_MSS; i += optlen(opt, i)) {
-		if (opt[i] == TCPOPT_MSS && opt[i+1] == TCPOLEN_MSS) {
-			u_int16_t oldmss;
+		if (opt[i] == TCPOPT_MSS && opt[i + 1] == TCPOLEN_MSS) {
+			u16 oldmss;
 
-			oldmss = (opt[i+2] << 8) | opt[i+3];
+			oldmss = (opt[i + 2] << 8) | opt[i + 3];
 
 			/* Never increase MSS, even when setting it, as
 			 * doing so results in problems for hosts that rely
@@ -127,8 +129,8 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 			if (oldmss <= newmss)
 				return 0;
 
-			opt[i+2] = (newmss & 0xff00) >> 8;
-			opt[i+3] = newmss & 0x00ff;
+			opt[i + 2] = (newmss & 0xff00) >> 8;
+			opt[i + 3] = newmss & 0x00ff;
 
 			inet_proto_csum_replace2(&tcph->check, skb,
 						 htons(oldmss), htons(newmss),
@@ -186,7 +188,7 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 	inet_proto_csum_replace4(&tcph->check, skb, 0, *((__be32 *)opt), false);
 
 	oldval = ((__be16 *)tcph)[6];
-	tcph->doff += TCPOLEN_MSS/4;
+	tcph->doff += TCPOLEN_MSS / 4;
 	inet_proto_csum_replace2(&tcph->check, skb,
 				 oldval, ((__be16 *)tcph)[6], false);
 	return TCPOLEN_MSS;
