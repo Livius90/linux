@@ -813,6 +813,18 @@ config NETFILTER_XT_DSCP
 	  The target allows you to manipulate the IPv4/IPv6
 	  header DSCP field (differentiated services codepoint).
 
+config NETFILTER_XT_HL
+	tristate '"HL" hoplimit target and match support'
+	depends on NETFILTER_ADVANCED
+	help
+	  This option adds the "HL" target and "hl" match.
+
+	  Netfilter hl matching allows you to match packets based on
+	  the hoplimit in the IPv6 header, or the time-to-live field in
+	  the IPv4 header of the packet.
+	  The target allows you to change the hoplimit/time-to-live
+	  value of the IP header.
+
 # alphabetically ordered list of targets
 
 comment "Xtables targets"
@@ -914,6 +926,7 @@ config NETFILTER_XT_TARGET_HL
 	tristate '"HL" hoplimit target support'
 	depends on IP_NF_MANGLE || IP6_NF_MANGLE || NFT_COMPAT
 	depends on NETFILTER_ADVANCED
+	select NETFILTER_XT_HL
 	help
 	This option adds the "HL" (for IPv6) and "TTL" (for IPv4)
 	targets, which enable the user to change the
@@ -924,6 +937,10 @@ config NETFILTER_XT_TARGET_HL
 	the header to arbitrary values. This is EXTREMELY DANGEROUS
 	since you can easily create immortal packets that loop
 	forever on the network.
+
+	This is a backwards-compat option for the user's convenience
+	(e.g. when running oldconfig). It selects
+	CONFIG_NETFILTER_XT_HL (combined hl/HL module).
 
 config NETFILTER_XT_TARGET_HMARK
 	tristate '"HMARK" target support'
@@ -1380,10 +1397,15 @@ config NETFILTER_XT_MATCH_HELPER
 config NETFILTER_XT_MATCH_HL
 	tristate '"hl" hoplimit/TTL match support'
 	depends on NETFILTER_ADVANCED
+	select NETFILTER_XT_HL
 	help
 	HL matching allows you to match packets based on the hoplimit
 	in the IPv6 header, or the time-to-live field in the IPv4
 	header of the packet.
+
+	This is a backwards-compat option for the user's convenience
+	(e.g. when running oldconfig). It selects
+	CONFIG_NETFILTER_XT_HL (combined hl/HL module).
 
 config NETFILTER_XT_MATCH_IPCOMP
 	tristate '"ipcomp" match support'
